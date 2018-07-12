@@ -10,23 +10,6 @@ const server = express()
 
 const wss = new SocketServer.Server({ server });
 
-function generateRandomColor() {
-  let randomColor = "";
-  let colors = ["rebeccapurple",
-                  "orange",
-                  "maroon",
-                  "orangered",
-                  "royalblue",
-                  "lightseagreen",
-                  "darkgoldenrod",
-                  "gold",
-                  "lawngreen",
-                  "darkgreen",
-                  "saddlebrown"];
-  randomColor += colors[Math.floor(Math.random() * colors.length)];
-  return randomColor;
-}
-
 wss.broadcast = (data, ws) => {
   wss.clients.forEach(client => {
     // if (client !== ws && client.readyState === SocketServer.OPEN) {
@@ -39,7 +22,6 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
   let totalClients = {
     total: wss.clients.size,
-    color: generateRandomColor(),
     type: "incomingClientConnected",
     id: uuidv4()
   };

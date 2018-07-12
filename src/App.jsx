@@ -2,6 +2,22 @@ import React, { Component } from 'react';
 import ChatBar from "./ChatBar.jsx";
 import MessageList from "./MessageList.jsx";
 
+function generateRandomColor() {
+  let randomColor = "";
+  let colors = ["rebeccapurple",
+                  "orange",
+                  "maroon",
+                  "orangered",
+                  "royalblue",
+                  "lightseagreen",
+                  "darkgoldenrod",
+                  "gold",
+                  "lawngreen",
+                  "darkgreen",
+                  "saddlebrown"];
+  randomColor += colors[Math.floor(Math.random() * colors.length)];
+  return randomColor;
+}
 
 class App extends Component {
 
@@ -11,7 +27,7 @@ class App extends Component {
                   currentUser: {name: ""},
                   messages: [],
                   totalUsers: 0,
-                  color: "black"
+                  color: generateRandomColor()
                   };
     this.addMessage = this.addMessage.bind(this);
     this.changeUserName = this.changeUserName.bind(this);
@@ -34,7 +50,6 @@ class App extends Component {
   }
 
   clientColor(color) {
-    document.getElementById('name-color').style.color = this.state.color;
     this.setState({color: this.state.color});
   }
 
@@ -51,11 +66,12 @@ class App extends Component {
 
       case "incomingMessage":
         this.addMessage(message);
-        this.clientColor(this.state.color);
+        window.scrollTo(0,document.body.scrollHeight);
         break;
 
       case "incomingNotification":
         this.addMessage(message);
+        window.scrollTo(0,document.body.scrollHeight);
         break;
 
       case "incomingClientConnected":
@@ -65,8 +81,8 @@ class App extends Component {
           content: "A user has connected",
           id: message.id
         };
-        this.setState({color: message.color});
         this.addMessage(userConnected);
+        window.scrollTo(0,document.body.scrollHeight);
         break;
 
       case "incomingClientDisconnected":
@@ -77,6 +93,7 @@ class App extends Component {
           id: message.id
         };
         this.addMessage(userDisconnected);
+        window.scrollTo(0,document.body.scrollHeight);
         break;
 
       default:
@@ -95,7 +112,10 @@ class App extends Component {
 
         <MessageList messages={this.state.messages} />
 
-        <ChatBar currentUser={this.state.currentUser.name} changeUserName={this.changeUserName} message={this.socket}/>
+        <ChatBar currentUser={this.state.currentUser.name}
+        changeUserName={this.changeUserName}
+        color={this.state.color}
+        message={this.socket}/>
 
       </div>
     );

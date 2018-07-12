@@ -8,7 +8,7 @@ class Message extends Component {
     if(this.props.messages.type === "incomingMessage") {
       return (
         <div className="message">
-          <span className="message-username" id="name-color">{this.props.messages.username}</span>
+          <span className="message-username" style={{color:this.props.messages.color}}>{this.props.messages.username}</span>
           <span className="message-content">{this.props.messages.content}</span>
         </div>
       );

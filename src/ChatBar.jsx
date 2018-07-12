@@ -17,7 +17,8 @@ class ChatBar extends Component {
         let newMessage = {
           username: username,
           content: content,
-          type: "postMessage"
+          type: "postMessage",
+          color: this.props.color
         };
 
         this.props.message.onopen(newMessage);
@@ -49,8 +50,14 @@ class ChatBar extends Component {
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" onKeyDown={onKeyDown} id="username" defaultValue={this.props.currentUser} placeholder="Anonymous" />
-        <input className="chatbar-message" onKeyUp={onKeyUp} placeholder="Type a message and hit ENTER"  />
+        <input className="chatbar-username"
+          onKeyDown={onKeyDown}
+          id="username"
+          defaultValue={this.props.currentUser}
+          placeholder="Anonymous" />
+        <input className="chatbar-message"
+          onKeyUp={onKeyUp}
+          placeholder="Type a message and hit ENTER"  />
       </footer>
     );
   }
