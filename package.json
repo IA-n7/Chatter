@@ -1,5 +1,5 @@
 {
-  "name": "Chatter",
+  "name": "Chattr",
   "version": "1.0.0",
   "description": "Messaging application using ReactJS",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IA-n7/Chatter"
+    "url": "https://github.com/IA-n7/Chattr"
   },
   "keywords": [
     "react",
@@ -22,9 +22,9 @@
   "author": "Ian Bradley <ian.e.w.bradley@gmail.com>",
   "license": "",
   "bugs": {
-    "url": "https://github.com/IA-n7/Chatter/issues"
+    "url": "https://github.com/IA-n7/Chattr/issues"
   },
-  "homepage": "https://github.com/IA-n7/Chatter",
+  "homepage": "https://github.com/IA-n7/Chattr",
   "engines": {
     "node": ">=6.0.0"
   },

@@ -8,22 +8,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-                  currentUser: {name: "Daniel"}, // optional. if currentUser is not defined, it means the user is Anonymous
-                  messages: [
-                    {
-                      username: "Daniel",
-                      content: "Has anyone seen my LIMITED EDITION BOIS??",
-                      id: "n623bk"
-                    },
-                    {
-                      username: "Anonymous",
-                      content: "No, I think you lost them. You lost your BOIS, Dan. You lost them for good.",
-                      id: "kfn32p"
-                    }
-                            ]
+                  currentUser: {name: ""}, // optional. if currentUser is not defined, it means the user is Anonymous
+                  messages: []
                   };
     this.addMessage = this.addMessage.bind(this);
+    this.changeUserName = this.changeUserName.bind(this);
     this.socket = new WebSocket('ws://localhost:3001');
+  }
+
+  changeUserName(username) {
+    this.setState({currentUser: {name: username}});
   }
 
   addMessage(message) {
@@ -53,7 +47,7 @@ class App extends Component {
 
         <MessageList messages={this.state.messages} />
 
-        <ChatBar currentUser={this.state.currentUser.name} addMessage={this.socket}/>
+        <ChatBar changeUserName={this.changeUserName} currentUser={this.state.currentUser.name} addMessage={this.socket}/>
 
       </div>
     );

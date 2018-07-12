@@ -21,9 +21,16 @@ class ChatBar extends Component {
       }
     };
 
+    const onKeyDown = evt => {
+        if(evt.keyCode === 13) {
+        const name = evt.target.value;
+        this.props.changeUserName(name);
+      }
+    };
+
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" id="username" defaultValue={this.props.currentUser}  />
+        <input className="chatbar-username" onKeyDown={onKeyDown} id="username" defaultValue={this.props.currentUser}  />
         <input className="chatbar-message" onKeyUp={onKeyUp} placeholder="Type a message and hit ENTER"  />
       </footer>
     );
