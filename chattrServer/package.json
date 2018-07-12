@@ -1,5 +1,5 @@
 {
-  "name": "chattysever",
+  "name": "chattrServer",
   "version": "1.0.0",
   "description": "ws server",
   "main": "server.js",

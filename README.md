@@ -1,45 +1,45 @@
-React Boilerplate
-=====================
+# Week 6 Project - Chattr Messaging App
 
-A minimal and light dev environment for ReactJS.
+Chattr is a simple, React.js based messaging application.
 
-### Usage
+It is built using HTML, CSS (SASS), JS, and React.js, Webpack, Babel, Node, and Express.
 
-Clone the boilerplate and create your own git repo.
+###Final Product
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+!["Screenshot of Chattr"]()
 
-Install the dependencies and start the server.
+### Dependencies
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
+* Express ^4.13.4
+* Node 5.10.x or above
+* Flexbox 0.0.3
+* Babel-core 6.23.1"
+* Babel-loader 6.3.1"
+* Babel-preset-es2015 6.22.0"
+* Babel-preset-react 6.23.0"
+* Babel-preset-stage-0 6.22.0"
+* CSS-loader 0.26.1"
+* ESlint 3.15.0"
+* ESlint-plugin-react 6.9.0"
+* Node-sass 4.5.0"
+* SASS-loader 6.0.0"
+* Sockjs-client ^1.1.2"
+* Style-loader 0.13.1"
+* Webpack 2.2.1"
+* Webpack-dev-server 2.3.0"
+* React 15.4.2"
+* React-dom 15.4.2"
 
-### Static Files
+### Getting Started / Usage
 
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
+1. Install all dependencies (using the `npm install` command).
+2. Run the development web server using the `npm start`
+3. Go to <http://localhost:3000/> in your browser.
 
 ### Linting
 
-This boilerplate project includes React ESLint configuration.
+React ESLint
 
 ```
 npm run lint
 ```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)

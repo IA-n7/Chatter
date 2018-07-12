@@ -28,6 +28,7 @@ class ChatBar extends Component {
     //USERNAME HANDLER
     const onKeyDown = evt => {
       if(evt.keyCode === 13) {
+        console.log(this.props);
 
         let currentUser = this.props.currentUser;
 
@@ -41,13 +42,14 @@ class ChatBar extends Component {
           type: "postNotification"
         };
 
+        this.props.changeUserName(evt.target.value);
         this.props.message.onopen(name);
       }
     };
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" onKeyDown={onKeyDown} id="username" defaultValue={this.props.currentUser}  />
+        <input className="chatbar-username" onKeyDown={onKeyDown} id="username" defaultValue={this.props.currentUser} placeholder="Anonymous" />
         <input className="chatbar-message" onKeyUp={onKeyUp} placeholder="Type a message and hit ENTER"  />
       </footer>
     );

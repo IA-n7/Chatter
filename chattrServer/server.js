@@ -1,20 +1,31 @@
-// server.js
-
 const express = require('express');
 const SocketServer = require('ws');
 const uuidv4 = require('uuid/v4');
 
-// Set the port to 3001
 const PORT = 3001;
 
-// Create a new express server
 const server = express()
-   // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
   .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${ PORT }`));
 
-// Create the WebSockets server
 const wss = new SocketServer.Server({ server });
+
+function generateRandomColor() {
+  let randomColor = "";
+  let colors = ["rebeccapurple",
+                  "orange",
+                  "maroon",
+                  "orangered",
+                  "royalblue",
+                  "lightseagreen",
+                  "darkgoldenrod",
+                  "gold",
+                  "lawngreen",
+                  "darkgreen",
+                  "saddlebrown"];
+  randomColor += colors[Math.floor(Math.random() * colors.length)];
+  return randomColor;
+}
 
 wss.broadcast = (data, ws) => {
   wss.clients.forEach(client => {
@@ -24,11 +35,15 @@ wss.broadcast = (data, ws) => {
   });
 };
 
-// Set up a callback that will run when a client connects to the server
-// When a client connects they are assigned a socket, represented by
-// the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  let totalClients = {
+    total: wss.clients.size,
+    color: generateRandomColor(),
+    type: "incomingClientConnected",
+    id: uuidv4()
+  };
+  wss.broadcast(JSON.stringify(totalClients), ws)
 
   ws.on('message', function incoming(data) {
     let message = JSON.parse(data);
@@ -50,11 +65,14 @@ wss.on('connection', (ws) => {
       break;
 
     default:
-      // throw new Error("Unknown event type " + data.type);
     }
   });
 
 
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
-  ws.on('close', () => console.log('Client disconnected'));
+  ws.on('close', () => {
+    console.log('Client disconnected');
+    totalClients.total = wss.clients.size;
+    totalClients.type = "incomingClientDisconnected"
+    wss.broadcast(JSON.stringify(totalClients), ws)
+  });
 });
