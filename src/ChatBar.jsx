@@ -2,29 +2,46 @@ import React, { Component } from 'react';
 
 class ChatBar extends Component {
   render() {
+    //CHAT MESSAGE HANDLER
     const onKeyUp = evt => {
       evt.preventDefault();
       if(evt.keyCode === 13) {
-        //TRY NEXTSIBLING (MAYBE PREVIOUSSIBLING)
-        // evt.target.elements.chatbar-username
 
         const content = evt.target.value;
-        const username = document.getElementById("username").value;
+        let username = document.getElementById("username").value;
+
+        if(username === "") {
+          username = "Anonymous"
+        }
 
         let newMessage = {
           username: username,
-          content: content
+          content: content,
+          type: "postMessage"
         };
 
-        this.props.addMessage.onopen(newMessage);
+        this.props.message.onopen(newMessage);
         evt.target.value = "";
       }
     };
 
+    //USERNAME HANDLER
     const onKeyDown = evt => {
-        if(evt.keyCode === 13) {
-        const name = evt.target.value;
-        this.props.changeUserName(name);
+      if(evt.keyCode === 13) {
+
+        let currentUser = this.props.currentUser;
+
+        if (this.props.currentUser === "") {
+          currentUser = "Anonymous";
+        }
+
+        const name = {
+          oldUsername: currentUser,
+          newUsername: evt.target.value,
+          type: "postNotification"
+        };
+
+        this.props.message.onopen(name);
       }
     };
 

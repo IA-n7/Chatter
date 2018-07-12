@@ -33,7 +33,21 @@ class App extends Component {
     };
     ws.onmessage = (data) => {
       let message = JSON.parse(data.data);
-      this.addMessage(message);
+
+      switch(message.type) {
+
+      case "incomingMessage":
+        this.addMessage(message);
+        break;
+
+      case "incomingNotification":
+        this.changeUserName(message.newUsername);
+        this.addMessage(message);
+        break;
+
+      default:
+        // throw new Error("Unknown event type " + data.type);
+      }
     };
    }
 
@@ -47,7 +61,7 @@ class App extends Component {
 
         <MessageList messages={this.state.messages} />
 
-        <ChatBar changeUserName={this.changeUserName} currentUser={this.state.currentUser.name} addMessage={this.socket}/>
+        <ChatBar currentUser={this.state.currentUser.name} message={this.socket}/>
 
       </div>
     );
