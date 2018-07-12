@@ -6,7 +6,9 @@ It is built using HTML, CSS (SASS), JS, and React.js, Webpack, Babel, Node, and 
 
 ###Final Product
 
-!["Screenshot of Chattr"]()
+!["Screenshot of Chattr-firstmessage"](https://raw.githubusercontent.com/IA-n7/Chattr/master/build/FirstMessage.png)
+!["Screenshot of Chattr-namechange"](https://raw.githubusercontent.com/IA-n7/Chattr/master/build/ChangeName.png)
+!["Screenshot of Chattr-moremessages"](https://raw.githubusercontent.com/IA-n7/Chattr/master/build/MoreMessages.png)
 
 ### Dependencies
 

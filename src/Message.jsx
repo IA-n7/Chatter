@@ -15,21 +15,21 @@ class Message extends Component {
     }
     if(this.props.messages.type === "incomingNotification") {
       return (
-        <div className="message">
+        <div className="message system">
           <span className="message-notification">{this.props.messages.oldUsername} changed their name to {this.props.messages.newUsername}</span>
         </div>
       );
     }
     if(this.props.messages.type === "incomingClientConnected") {
       return (
-        <div className="message">
+        <div className="message system">
           <span className="message-connected">{this.props.messages.content}</span>
         </div>
       );
     }
     if(this.props.messages.type === "incomingClientDisconnected") {
       return (
-        <div className="message">
+        <div className="message system">
           <span className="message-disconnected">{this.props.messages.content}</span>
         </div>
       );
