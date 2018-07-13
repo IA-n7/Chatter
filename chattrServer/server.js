@@ -12,9 +12,9 @@ const wss = new SocketServer.Server({ server });
 
 wss.broadcast = (data, ws) => {
   wss.clients.forEach(client => {
-    // if (client !== ws && client.readyState === SocketServer.OPEN) {
+    if (client.readyState === SocketServer.OPEN) {
       client.send(data);
-    // }
+    }
   });
 };
 
@@ -55,6 +55,7 @@ wss.on('connection', (ws) => {
     console.log('Client disconnected');
     totalClients.total = wss.clients.size;
     totalClients.type = "incomingClientDisconnected"
+    totalClients.id = uuidv4();
     wss.broadcast(JSON.stringify(totalClients), ws)
   });
 });
