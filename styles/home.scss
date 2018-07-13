@@ -37,7 +37,6 @@
     }
 
     .message {
-      display: flex;
       padding: 5px;
     }
 
@@ -54,11 +53,14 @@
     }
 
     .message-content {
-      flex: 8;
+    }
+
+    #images {
+      max-width: 450px;
+      max-height: 250px;
     }
 
     .message-username {
-      flex: 2;
       font-weight: 700;
       color: black;
     }
