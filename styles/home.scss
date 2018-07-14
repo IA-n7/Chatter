@@ -111,7 +111,17 @@
       align-items: center;
     }
 
-    .modal-content {
+    .modal-color {
+      width: 250px;
+      height: 30px;
+      background-color: black;
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+    }
+
+    .modal-preferences {
       width: 250px;
       height: 30px;
       background-color: black;
@@ -137,19 +147,51 @@
       margin-top: 3px;
     }
 
+    .preferences-box {
+      margin-right: 35px;
+      margin-top: 3px;
+    }
+
     .color-choice {
       border-radius: 10px;
     }
 
+    .preferences-timestamps {
+      float: left;
+      margin-top: 3px;
+      margin-left: 50px;
+      color: white;
+      font-weight: 1000;
+    }
+
+    .preferences-choice {
+      border-radius: 10px;
+      margin-right: 30px;
+    }
+
     .color-button {
       border-radius: 10px;
-      font-size: 12px;
       border: 1px solid black;
-      display: block;
-      height: 40px;
+      height: 18px;
       line-height: 40px;
       margin: 5px;
-      padding: 0 9px;
+      margin-top: 11px;
+      padding: 0 7px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .preferences-button {
+      border-radius: 10px;
+      border: 1px solid black;
+      height: 18px;
+      line-height: 40px;
+      margin: 5px;
+      margin-top: 11px;
+      padding: 0 7px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      background-color: black;
     }
 
     #rebeccapurple{

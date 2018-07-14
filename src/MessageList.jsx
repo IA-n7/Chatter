@@ -26,10 +26,29 @@ class MessageList extends Component {
 
     return (
       <main className="messages">
+
         {listMessages}
+
         <div className="bg-modal"
-            style={{display: this.props.display}}>>
-          <div className="modal-content">
+            style={{display: this.props.preferencesDisplay}}>
+          <div className="modal-preferences">
+          <input className="close"
+            onClick={onClose}
+            type="submit"
+            value="+" />
+          <form className="preferences-box">
+            <span className="preferences-timestamps">Timestamps  </span>
+            <input className="preferences-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""/>
+          </form>
+          </div>
+        </div>
+
+        <div className="bg-modal"
+            style={{display: this.props.display}}>
+          <div className="modal-color">
           <input className="close"
             onClick={onClose}
             type="submit"

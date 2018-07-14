@@ -40,6 +40,7 @@ class App extends Component {
     this.state = {
                   currentUser: {name: ""},
                   display: "none",
+                  preferencesDisplay: "none",
                   messages: [],
                   totalUsers: 0,
                   menuOpen: false,
@@ -51,6 +52,7 @@ class App extends Component {
     this.userAmount = this.userAmount.bind(this);
     this.colorMenu = this.colorMenu.bind(this);
     this.changeColor = this.changeColor.bind(this);
+    this.preferencesMenu = this.preferencesMenu.bind(this);
     this.socket = new WebSocket('ws://localhost:3001');
   }
 
@@ -69,8 +71,13 @@ class App extends Component {
     this.setState({totalUsers: total});
   }
 
+  changeColor(color) {
+    this.setState({color: color});
+  }
+
   colorMenu() {
     if(this.state.menuOpen) {
+      this.setState({preferencesDisplay: "none"});
       this.setState({display: "none"});
       this.setState({menuOpen: false});
     } else {
@@ -79,8 +86,15 @@ class App extends Component {
     }
   }
 
-  changeColor(color) {
-    this.setState({color: color});
+  preferencesMenu() {
+    if(this.state.menuOpen) {
+      this.setState({preferencesDisplay: "none"});
+      this.setState({display: "none"});
+      this.setState({menuOpen: false});
+    } else {
+      this.setState({preferencesDisplay: "flex"});
+      this.setState({menuOpen: true});
+    }
   }
 
   //WEBSOCKET SERVER COMMUNICATION
@@ -144,6 +158,7 @@ class App extends Component {
         <MessageList
         messages={this.state.messages}
         display={this.state.display}
+        preferencesDisplay={this.state.preferencesDisplay}
         colorMenu={this.colorMenu}
         changeColor={this.changeColor} />
 
@@ -153,6 +168,7 @@ class App extends Component {
         color={this.state.color}
         message={this.socket}
         colorMenu={this.colorMenu}
+        preferencesMenu={this.preferencesMenu}
         anonymous={this.state.anonymousName}/>
 
       </div>

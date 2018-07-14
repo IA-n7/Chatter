@@ -55,19 +55,32 @@ class ChatBar extends Component {
       this.props.colorMenu();
     }
 
+    // PREFERENCES HANDLER
+    const onPref = evt => {
+      evt.preventDefault();
+      this.props.preferencesMenu();
+    }
+
     return (
       <footer className="chatbar">
+        <input className="preferences-button"
+          onClick={onPref}
+          type="image"
+          src="build/preferences.png"
+          value="" />
+        <input className="color-button"
+          id="color-button"
+          onClick={onClick}
+          type="image"
+          src="build/color.png"
+          style={{backgroundColor:this.props.color}}
+          value="" />
         <input className="chatbar-username"
           onKeyDown={onKeyDown}
           id="username"
           defaultValue={this.props.currentUser}
           placeholder={this.props.anonymous} />
-        <input className="color-button"
-          id="color-button"
-          onClick={onClick}
-          type="submit"
-          style={{backgroundColor:this.props.color}}
-          value="Color" />
+
         <input className="chatbar-message"
           onKeyUp={onKeyUp}
           placeholder="Type a message and hit ENTER"  />
