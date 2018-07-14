@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import ChatBar from "./ChatBar.jsx";
 import MessageList from "./MessageList.jsx";
 
-// TODO:
-// STOP EMPTY CONTENT BEING SENT
-// MODAL COLOR MENU
 
-
+// HELPER FUNCTIONS
 function generateRandomColor() {
   let randomColor = "";
   let colors = ["rebeccapurple",
@@ -35,6 +32,7 @@ function generateAnonymous () {
   return name;
 }
 
+// MAIN COMPONENT
 class App extends Component {
 
   constructor(props) {
@@ -56,6 +54,8 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001');
   }
 
+
+  //COMPONENT METHODS
   changeUserName(username) {
     this.setState({currentUser: {name: username}});
   }
@@ -131,6 +131,7 @@ class App extends Component {
     };
    }
 
+   // RENDERING AND PASSING ALL PROPS
   render() {
     return (
       <div>

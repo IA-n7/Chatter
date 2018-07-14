@@ -20,6 +20,7 @@ wss.broadcast = (data, ws) => {
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  // TOTAL CLIENTS HANDLER (++)
   let totalClients = {
     total: wss.clients.size,
     type: "incomingClientConnected",
@@ -30,6 +31,7 @@ wss.on('connection', (ws) => {
   ws.on('message', function incoming(data) {
     let message = JSON.parse(data);
 
+    // MESSAGE HANDLER
     switch(message.type) {
 
     case "postMessage":
@@ -53,6 +55,7 @@ wss.on('connection', (ws) => {
 
   ws.on('close', () => {
     console.log('Client disconnected');
+    // TOTAL CLIENTS HANDLER (--)
     totalClients.total = wss.clients.size;
     totalClients.type = "incomingClientDisconnected"
     totalClients.id = uuidv4();

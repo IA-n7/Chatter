@@ -49,6 +49,7 @@ class ChatBar extends Component {
       }
     };
 
+    // COLOR MENU HANDLER
     const onClick = evt => {
       evt.preventDefault();
       this.props.colorMenu();

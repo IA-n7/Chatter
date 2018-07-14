@@ -5,11 +5,13 @@ import Message from "./Message.jsx";
 class MessageList extends Component {
   render() {
 
+    // COLOR MENU CLOSING HANDLER
     const onClose = evt => {
       evt.preventDefault();
       this.props.colorMenu();
     }
 
+    // CHANGE COLOR HANDLER
     const onColor = evt => {
       evt.preventDefault();
       this.props.changeColor(evt.target.id);
