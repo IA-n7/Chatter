@@ -16,6 +16,7 @@ class MessageList extends Component {
       evt.preventDefault();
       this.props.changeColor(evt.target.id);
       this.props.colorMenu();
+      document.getElementById("color-button").style.backgroundColor = evt.target.id;
     }
 
     //LIST ALL MESSAGES

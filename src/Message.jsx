@@ -19,7 +19,6 @@ class Message extends Component {
           </div>
         );
       }
-      
       return (
         <div className="message">
           <span className="message-username" style={{color:this.props.messages.color}}>{this.props.messages.username}</span>

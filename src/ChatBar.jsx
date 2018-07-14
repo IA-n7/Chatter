@@ -66,6 +66,7 @@ class ChatBar extends Component {
           id="color-button"
           onClick={onClick}
           type="submit"
+          style={{backgroundColor:this.props.color}}
           value="Color" />
         <input className="chatbar-message"
           onKeyUp={onKeyUp}
