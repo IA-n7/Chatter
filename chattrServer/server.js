@@ -10,6 +10,11 @@ const server = express()
 
 const wss = new SocketServer.Server({ server });
 
+function currentTime() {
+  let currentTime = Date.now();
+  return currentTime;
+}
+
 wss.broadcast = (data, ws) => {
   wss.clients.forEach(client => {
     if (client.readyState === SocketServer.OPEN) {
@@ -23,6 +28,7 @@ wss.on('connection', (ws) => {
   // TOTAL CLIENTS HANDLER (++)
   let totalClients = {
     total: wss.clients.size,
+    messageTime: currentTime(),
     type: "incomingClientConnected",
     id: uuidv4()
   };
@@ -57,7 +63,8 @@ wss.on('connection', (ws) => {
     console.log('Client disconnected');
     // TOTAL CLIENTS HANDLER (--)
     totalClients.total = wss.clients.size;
-    totalClients.type = "incomingClientDisconnected"
+    totalClients.type = "incomingClientDisconnected";
+    totalClients.messageTime = currentTime();
     totalClients.id = uuidv4();
     wss.broadcast(JSON.stringify(totalClients), ws)
   });

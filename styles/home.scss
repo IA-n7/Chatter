@@ -50,11 +50,18 @@
     .message-content,
     .message-username {
       overflow: hidden;
+      overflow-wrap: break-word;
       margin: 5px;
       padding: 0 10px;
     }
 
     .message-content {
+
+    }
+
+    .message-time {
+      float: right;
+      margin-right: 20px;
     }
 
     #images {

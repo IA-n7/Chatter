@@ -19,9 +19,20 @@ class MessageList extends Component {
       document.getElementById("color-button").style.backgroundColor = evt.target.id;
     }
 
+    // TIMESTAMP HANDLER
+    const onTimestamp = evt => {
+      evt.preventDefault();
+      this.props.showTimestamps();
+      this.props.colorMenu();
+
+    }
+
     //LIST ALL MESSAGES
     const listMessages = this.props.messages.map((messages) =>
-      <Message key={messages.id} messages={messages} />
+      <Message key={messages.id}
+        messages={messages}
+        calculateTimeSince={this.props.calculateTimeSince}
+        timestampDisplay={this.props.timestampDisplay}/>
     );
 
     return (
@@ -39,7 +50,7 @@ class MessageList extends Component {
           <form className="preferences-box">
             <span className="preferences-timestamps">Timestamps  </span>
             <input className="preferences-choice"
-                    onClick={onColor}
+                    onClick={onTimestamp}
                     type="submit"
                     value=""/>
           </form>

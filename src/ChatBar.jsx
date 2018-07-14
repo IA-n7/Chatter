@@ -11,6 +11,7 @@ class ChatBar extends Component {
 
         const content = evt.target.value;
         let username = this.props.currentUser;
+        let messageTime = Date.now();
 
         if(this.props.currentUser === "") {
           username = this.props.anonymous;
@@ -19,6 +20,7 @@ class ChatBar extends Component {
         let newMessage = {
           username: username,
           content: content,
+          messageTime: messageTime,
           type: "postMessage",
           color: this.props.color
         };
@@ -33,6 +35,8 @@ class ChatBar extends Component {
       if(evt.keyCode === 13) {
 
         let currentUser = this.props.currentUser;
+        let messageTime = Date.now();
+
 
         if (this.props.currentUser === "") {
           currentUser = this.props.anonymous;
@@ -41,6 +45,7 @@ class ChatBar extends Component {
         const name = {
           oldUsername: currentUser,
           newUsername: evt.target.value,
+          messageTime: messageTime,
           type: "postNotification"
         };
 

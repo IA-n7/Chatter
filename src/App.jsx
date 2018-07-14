@@ -41,6 +41,7 @@ class App extends Component {
                   currentUser: {name: ""},
                   display: "none",
                   preferencesDisplay: "none",
+                  timestampDisplay: "none",
                   messages: [],
                   totalUsers: 0,
                   menuOpen: false,
@@ -53,6 +54,8 @@ class App extends Component {
     this.colorMenu = this.colorMenu.bind(this);
     this.changeColor = this.changeColor.bind(this);
     this.preferencesMenu = this.preferencesMenu.bind(this);
+    this.calculateTimeSince = this.calculateTimeSince.bind(this);
+    this.showTimestamps = this.showTimestamps.bind(this);
     this.socket = new WebSocket('ws://localhost:3001');
   }
 
@@ -97,6 +100,33 @@ class App extends Component {
     }
   }
 
+  showTimestamps() {
+    if(this.state.timestampDisplay === "none") {
+      this.setState({timestampDisplay: "flex"});
+    } else {
+      this.setState({timestampDisplay: "none"});
+    }
+  }
+
+  calculateTimeSince (messageTime) {
+    let currentTime = Date.now();
+    let timeSince = currentTime - messageTime;
+    let seconds = timeSince / 1000;
+    let minutes = timeSince / 1000 / 60;
+
+
+    if (seconds < 60) {
+      return Math.round(seconds) + "s";
+    }
+    if(minutes < 60) {
+      return Math.round(minutes) + "m";
+    }
+    if(hours < 24) {
+      return Math.round(hours) + "h";
+    }
+    return Math.round(days) + "d";
+  }
+
   //WEBSOCKET SERVER COMMUNICATION
   componentDidMount() {
     const ws = this.socket;
@@ -105,7 +135,6 @@ class App extends Component {
     };
     ws.onmessage = (data) => {
       let message = JSON.parse(data.data);
-
       switch(message.type) {
 
       case "incomingMessage":
@@ -123,6 +152,7 @@ class App extends Component {
         const userConnected = {
           type: "incomingClientConnected",
           content: "A user has connected",
+          messageTime: message.messageTime,
           id: message.id
         };
         this.addMessage(userConnected);
@@ -134,6 +164,7 @@ class App extends Component {
         const userDisconnected = {
           type: "incomingClientDisconnected",
           content: "A user has disconnected",
+          messageTime: message.messageTime,
           id: message.id
         };
         this.addMessage(userDisconnected);
@@ -159,8 +190,11 @@ class App extends Component {
         messages={this.state.messages}
         display={this.state.display}
         preferencesDisplay={this.state.preferencesDisplay}
+        timestampDisplay={this.state.timestampDisplay}
         colorMenu={this.colorMenu}
-        changeColor={this.changeColor} />
+        changeColor={this.changeColor}
+        calculateTimeSince={this.calculateTimeSince}
+        showTimestamps={this.showTimestamps} />
 
         <ChatBar
         currentUser={this.state.currentUser.name}
