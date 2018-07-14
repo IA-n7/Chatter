@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import ChatBar from "./ChatBar.jsx";
 import MessageList from "./MessageList.jsx";
 
+// TODO:
+// STOP EMPTY CONTENT BEING SENT
+// MODAL COLOR MENU
+
+
 function generateRandomColor() {
   let randomColor = "";
   let colors = ["rebeccapurple",
@@ -19,20 +24,35 @@ function generateRandomColor() {
   return randomColor;
 }
 
+function generateAnonymous () {
+  let name = "Anonymous";
+  let randomNumberString = "";
+  let numbers = "0123456789";
+  for (let i = 0; i < 4; i++) {
+    randomNumberString += numbers.charAt(Math.floor(Math.random() * numbers.length));
+  }
+  name += randomNumberString;
+  return name;
+}
+
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
                   currentUser: {name: ""},
+                  display: "none",
                   messages: [],
                   totalUsers: 0,
+                  menuOpen: false,
+                  anonymousName: generateAnonymous(),
                   color: generateRandomColor()
                   };
     this.addMessage = this.addMessage.bind(this);
     this.changeUserName = this.changeUserName.bind(this);
     this.userAmount = this.userAmount.bind(this);
-    this.clientColor = this.clientColor.bind(this);
+    this.colorMenu = this.colorMenu.bind(this);
+    this.changeColor = this.changeColor.bind(this);
     this.socket = new WebSocket('ws://localhost:3001');
   }
 
@@ -49,8 +69,18 @@ class App extends Component {
     this.setState({totalUsers: total});
   }
 
-  clientColor(color) {
-    this.setState({color: this.state.color});
+  colorMenu() {
+    if(this.state.menuOpen) {
+      this.setState({display: "none"});
+      this.setState({menuOpen: false});
+    } else {
+      this.setState({display: "flex"});
+      this.setState({menuOpen: true});
+    }
+  }
+
+  changeColor(color) {
+    this.setState({color: color});
   }
 
   //WEBSOCKET SERVER COMMUNICATION
@@ -110,12 +140,19 @@ class App extends Component {
         <span className="navbar-users">{this.state.totalUsers} users online</span>
       </nav>
 
-        <MessageList messages={this.state.messages} />
+        <MessageList
+        messages={this.state.messages}
+        display={this.state.display}
+        colorMenu={this.colorMenu}
+        changeColor={this.changeColor} />
 
-        <ChatBar currentUser={this.state.currentUser.name}
+        <ChatBar
+        currentUser={this.state.currentUser.name}
         changeUserName={this.changeUserName}
         color={this.state.color}
-        message={this.socket}/>
+        message={this.socket}
+        colorMenu={this.colorMenu}
+        anonymous={this.state.anonymousName}/>
 
       </div>
     );

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 
 class ChatBar extends Component {
+
   render() {
+
     //CHAT MESSAGE HANDLER
     const onKeyUp = evt => {
       evt.preventDefault();
       if(evt.keyCode === 13) {
 
         const content = evt.target.value;
-        let username = document.getElementById("username").value;
+        let username = this.props.currentUser;
 
-        if(username === "") {
-          username = "Anonymous"
+        if(this.props.currentUser === "") {
+          username = this.props.anonymous;
         }
 
         let newMessage = {
@@ -29,12 +31,11 @@ class ChatBar extends Component {
     //USERNAME HANDLER
     const onKeyDown = evt => {
       if(evt.keyCode === 13) {
-        console.log(this.props);
 
         let currentUser = this.props.currentUser;
 
         if (this.props.currentUser === "") {
-          currentUser = "Anonymous";
+          currentUser = this.props.anonymous;
         }
 
         const name = {
@@ -48,13 +49,23 @@ class ChatBar extends Component {
       }
     };
 
+    const onClick = evt => {
+      evt.preventDefault();
+      this.props.colorMenu();
+    }
+
     return (
       <footer className="chatbar">
         <input className="chatbar-username"
           onKeyDown={onKeyDown}
           id="username"
           defaultValue={this.props.currentUser}
-          placeholder="Anonymous" />
+          placeholder={this.props.anonymous} />
+        <input className="color-button"
+          id="color-button"
+          onClick={onClick}
+          type="submit"
+          value="Color" />
         <input className="chatbar-message"
           onKeyUp={onKeyUp}
           placeholder="Type a message and hit ENTER"  />

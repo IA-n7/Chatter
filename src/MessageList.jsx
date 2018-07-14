@@ -5,6 +5,17 @@ import Message from "./Message.jsx";
 class MessageList extends Component {
   render() {
 
+    const onClose = evt => {
+      evt.preventDefault();
+      this.props.colorMenu();
+    }
+
+    const onColor = evt => {
+      evt.preventDefault();
+      this.props.changeColor(evt.target.id);
+      this.props.colorMenu();
+    }
+
     //LIST ALL MESSAGES
     const listMessages = this.props.messages.map((messages) =>
       <Message key={messages.id} messages={messages} />
@@ -13,6 +24,83 @@ class MessageList extends Component {
     return (
       <main className="messages">
         {listMessages}
+        <div className="bg-modal"
+            style={{display: this.props.display}}>>
+          <div className="modal-content">
+          <input className="close"
+            onClick={onClose}
+            type="submit"
+            value="+" />
+          <form className="color-box">
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="rebeccapurple"
+                    style={{color: "rebeccapurple"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="royalblue"
+                    style={{color: "royalblue"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="lightseagreen"
+                    style={{color: "lightseagreen"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="lawngreen"
+                    style={{color: "lawngreen"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="darkgreen"
+                    style={{color: "darkgreen"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="darkgoldenrod"
+                    style={{color: "darkgoldenrod"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="gold"
+                    style={{color: "gold"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="orange"
+                    style={{color: "orange"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="orangered"
+                    style={{color: "orangered"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="maroon"
+                    style={{color: "maroon"}}/>
+            <input className="color-choice"
+                    onClick={onColor}
+                    type="submit"
+                    value=""
+                    id="saddlebrown"
+                    style={{color: "saddlebrown"}}/>
+          </form>
+          </div>
+        </div>
       </main>
     );
   }
