@@ -7,50 +7,58 @@ class ChatBar extends Component {
     //CHAT MESSAGE HANDLER
     const onKeyUp = evt => {
       evt.preventDefault();
-      if(evt.keyCode === 13) {
+      if (evt.keyCode === 13) {
 
-        const content = evt.target.value;
-        let username = this.props.currentUser;
-        let messageTime = Date.now();
+        if (evt.target.value === "") {
+          // DO NOTHING ON EMPTY FIELD ENTRY
+        } else {
+          const content = evt.target.value;
+          let username = this.props.currentUser;
+          let messageTime = Date.now();
 
-        if(this.props.currentUser === "") {
-          username = this.props.anonymous;
+          if (this.props.currentUser === "") {
+            username = this.props.anonymous;
+          }
+
+          let newMessage = {
+            username: username,
+            content: content,
+            messageTime: messageTime,
+            type: "postMessage",
+            color: this.props.color
+          };
+
+          this.props.message.onopen(newMessage);
+          evt.target.value = "";
         }
-
-        let newMessage = {
-          username: username,
-          content: content,
-          messageTime: messageTime,
-          type: "postMessage",
-          color: this.props.color
-        };
-
-        this.props.message.onopen(newMessage);
-        evt.target.value = "";
       }
     };
 
     //USERNAME HANDLER
     const onKeyDown = evt => {
-      if(evt.keyCode === 13) {
+      if (evt.keyCode === 13) {
 
         let currentUser = this.props.currentUser;
         let messageTime = Date.now();
 
+        if (currentUser === evt.target.value) {
+          // DO NOTHING
+        } else {
+          if (this.props.currentUser === "") {
+            currentUser = this.props.anonymous;
+          }
 
-        if (this.props.currentUser === "") {
-          currentUser = this.props.anonymous;
+          const name = {
+            oldUsername: currentUser,
+            newUsername: evt.target.value,
+            messageTime: messageTime,
+            color: this.props.color,
+            type: "postNotification"
+          };
+
+          this.props.changeUserName(evt.target.value);
+          this.props.message.onopen(name);
         }
-
-        const name = {
-          oldUsername: currentUser,
-          newUsername: evt.target.value,
-          messageTime: messageTime,
-          type: "postNotification"
-        };
-
-        this.props.changeUserName(evt.target.value);
-        this.props.message.onopen(name);
       }
     };
 

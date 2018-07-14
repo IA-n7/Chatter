@@ -45,7 +45,13 @@ class Message extends Component {
       return (
         <div className="message system">
           <span className="message-notification">
-            {this.props.messages.oldUsername} changed their name to {this.props.messages.newUsername}
+            <span style={{color:this.props.messages.color}}>
+                {this.props.messages.oldUsername}
+            </span>
+            <span> changed their name to </span>
+            <span style={{color:this.props.messages.color}}>
+                {this.props.messages.newUsername}
+            </span>
           </span>
         </div>
       );
